@@ -27,7 +27,7 @@
 # Author: vitorsilverio
 # Author: jaideraf
 #
-# Last update: 2015-08-19
+# Last update: 2015-08-20
 ###########################################################################
 
 function makeDirectoryName {
@@ -52,8 +52,8 @@ function main {
 			PCKG_DIR="$DIR_OUT"/$(makeDirectoryName "$CONT")
 			mkdir "$PCKG_DIR"
 			cp "$pdf" "$PCKG_DIR"
-			makeContentsFile "$(echo "$pdf" | sed 's/.*\///')" "$PCKG_DIR"
-			makeDCxmlFile "$(echo "$pdf" | sed 's/.*\///')" "$PCKG_DIR"
+			makeContentsFile "${pdf/.*\///}" "$PCKG_DIR"
+			makeDCxmlFile "${pdf/.*\///}" "$PCKG_DIR"
 			CONT=$((CONT+1))
 		done
 }
