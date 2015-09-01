@@ -75,7 +75,7 @@ function makeDCxmlFile {
         local _path="$2" 
         local _metadata="$3"
         
-        checkMetadataToUse "_metadata"
+        checkMetadataToUse "$_metadata"
         printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<dublin_core schema=\"$schema\">\n  <dcvalue element=\"$element\" qualifier=\"$qualifier\" language=\"\">%s</dcvalue>\n</dublin_core>" "$_file" > "$_path"/dublin_core.xml
 }
 
