@@ -29,15 +29,19 @@
 # Author: vitorsilverio
 # Author: jaideraf
 #
-# Last update: 2015-08-31
+# Last update: 2015-09-01
 ###########################################################################
 
 function checkMetadataToUse {
-        if [ -z "$1" ]
+        
+        #Params
+        local _metadata="$1"
+        
+        if [ -z "$_metadata" ]
         then
                 metadata="dc.identifier.file"
         else
-                metadata="$1"
+                metadata="$_metadata"
         fi
 
         IFS='.' read -ra m <<< "$metadata"
@@ -48,33 +52,56 @@ function checkMetadataToUse {
 }
 
 function makeDirectoryName {
-        printf "item_%05d" "$1"
+        
+        #Params
+        local _number="$1"
+        
+        printf "item_%05d" "$_number"
 }
 
 function makeContentsFile {
-        printf "%s\tbundle:ORIGINAL" "$1" > "$2"/contents
+        
+        #Params
+        local _file="$1"
+        local _path="$2"
+        
+        printf "%s\tbundle:ORIGINAL" "$_file" > "$_path"/contents
 }
 
 function makeDCxmlFile {
-        checkMetadataToUse "$3"
-        printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<dublin_core schema=\"$schema\">\n  <dcvalue element=\"$element\" qualifier=\"$qualifier\" language=\"\">%s</dcvalue>\n</dublin_core>" "$1" > "$2"/dublin_core.xml
+        
+        #Params
+        local _file="$1"
+        local _path="$2" 
+        local _metadata="$3"
+        
+        checkMetadataToUse "$_metadata"
+        printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<dublin_core schema=\"$schema\">\n  <dcvalue element=\"$element\" qualifier=\"$qualifier\" language=\"\">%s</dcvalue>\n</dublin_core>" "$_file" > "$_path"/dublin_core.xml
 }
 
 function main {
-        CONT=1
-        DIR_PDF=$1
-        DIR_OUT=$2
-        METADATA=$3
+        
+        #Params
+        local _pdf_dir="$1"
+        local _output_dir="$2"
+        local _metadata="$3"
+        
+        #Local Variables
+        local cont=1
 
-        for pdf in $DIR_PDF/*.pdf
+        for pdf in $_pdf_dir/*.pdf
         do
-                PCKG_DIR="$DIR_OUT"/$(makeDirectoryName "$CONT")
+                PCKG_DIR="$_output_dir"/$(makeDirectoryName "$cont")
                 mkdir "$PCKG_DIR"
                 cp "$pdf" "$PCKG_DIR"
                 makeContentsFile "${pdf/*\//}" "$PCKG_DIR"
-                makeDCxmlFile "${pdf/*\//}" "$PCKG_DIR" "$METADATA"
-                CONT=$((CONT+1))
+                makeDCxmlFile "${pdf/*\//}" "$PCKG_DIR" "$_metadata"
+                cont=$((cont+1))
         done
 }
 
+# Params
+# 1 - pdfs path
+# 2 - output path
+# 3 - metadata (optional)
 main "$1" "$2" "$3"
