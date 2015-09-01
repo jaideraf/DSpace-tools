@@ -23,7 +23,9 @@
 #
 # Uso: "./generateSafPackageFromPdf.sh pdfs out", onde "pdfs" é o diretório 
 # que contém os arquivos PDF coletados e "out" é o diretório de saída.
-#
+# Opcionalmente, há o terceiro parâmetro para especificar o metadado 
+# utilizado: "./generateSafPackageFromPdf.sh pdfs out metadado"
+# 
 # Author: vitorsilverio
 # Author: jaideraf
 #
@@ -38,12 +40,11 @@ function checkMetadataToUse {
                 metadata="$1"
         fi
 
-        IFS='.' read -a m <<< "$metadata"
+        IFS='.' read -ra m <<< "$metadata"
 
         schema="${m[0]}"
         element="${m[1]}"
         qualifier="${m[2]}"
-
 }
 
 function makeDirectoryName {
