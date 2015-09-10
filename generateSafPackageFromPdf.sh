@@ -87,16 +87,16 @@ function main {
         local _metadata="$3"
         
         #Local Variables
-        local cont=1
+        local count=1
 
         for pdf in $_pdf_dir/*.pdf
         do
-                PCKG_DIR="$_output_dir"/$(makeDirectoryName "$cont")
+                PCKG_DIR="$_output_dir"/$(makeDirectoryName "$count")
                 mkdir "$PCKG_DIR"
                 cp "$pdf" "$PCKG_DIR"
                 makeContentsFile "${pdf/*\//}" "$PCKG_DIR"
                 makeDCxmlFile "${pdf/*\//}" "$PCKG_DIR" "$_metadata"
-                cont=$((cont+1))
+                count=$((count+1))
         done
 }
 
