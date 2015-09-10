@@ -20,6 +20,11 @@
 # Author: Oberdan Luiz May
 #
 # Last update: 2015-09-10
+# 
+# Requires external libs:
+# Text::CSV
+# Tie::IxHash
+# Use CPAN or OS package to install
 ###########################################################################
 
 use strict;
@@ -27,13 +32,16 @@ use warnings;
 use Text::CSV;
 use Tie::IxHash;
 
+#Recebe os parametros
+my ($input_file, $output_file) = @ARGV;
+
 #Inicializa o parser de csv
 my $csv_parser = Text::CSV->new( { binary     => 1, 
 		                   sep_char   => ',', 
 				   quote_char => '"' } );
 
-open( my $in  , '<:encoding(utf-8)' , '11449-1.csv' );
-open( my $out , '>:encoding(utf-8)' , 'dedup.csv' );
+open( my $in  , '<:encoding(utf-8)' , $input_file );
+open( my $out , '>:encoding(utf-8)' , $output_file );
 
 while( my $row = $csv_parser->getline($in) ){
    my $i = 5;
