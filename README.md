@@ -7,5 +7,6 @@ Tools for DSpace repositories management
 ## See also 
 
 * [DSpace](https://github.com/DSpace/DSpace)
+* [Metadata conversions to DSpace](https://github.com/fsassumpcao/metadata-conversions-to-dspace)
 * [Item2CollectionRuler](https://github.com/vitorsilverio/Item2CollectionRuler) [(designer)](https://github.com/vitorsilverio/Item2CollectionRulerDesigner)
 * [MetadataPatterner](https://github.com/vitorsilverio/MetadataPatterner) [(designer)](https://github.com/vitorsilverio/MetadataPatternerDesigner)
