@@ -15,19 +15,20 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 # http://www.gnu.org/copyleft/gpl.html
 #
-# Descrição: Script para a criação de diretórios contendo os arquivos 
-# "contents" e "dublin_core.xml" a partir de arquivos PDF coletados para 
-# inclusão no DSpace. 
-# Os nomes dos arquivos PDF devem estar de acordo com o metadado ecolhido
-# ("dc.identifier.file" por padrão), presentes nos itens do DSpace.
+# Description: Script to create the directory structure containing the 
+# "contents" and the “dublin_core.xml" files from PDF files collected in 
+# order to be ingested in DSpace.
+# The PDF file names must be stored in a metadata field of the DSpace item 
+# ("dc.identifier.file" by default).
 #
-# Uso: "./generateSafPackageFromPdf.sh pdfs out", onde "pdfs" é o diretório 
-# que contém os arquivos PDF coletados e "out" é o diretório de saída.
-# Opcionalmente, há o terceiro parâmetro para especificar o metadado 
-# utilizado: "./generateSafPackageFromPdf.sh pdfs out metadado"
+# Syntax: "./generateSafPackageFromPdf.sh pdfs out", where "pdfs" is the 
+# directory that contains the PDF files and "out" is the output directory.
+# Optionally, there is the third parameter to specify the metadata used to 
+# match the file name: "./generateSafPackageFromPdf.sh pdfs out metadata"
+# ("dc.identifier.file" is the default value).
 # 
-# Author: vitorsilverio
-# Author: jaideraf
+# Author: @vitorsilverio
+# Author: @jaideraf
 #
 # Last update: 2015-09-01
 ###########################################################################
