@@ -39,8 +39,8 @@ my ($input_file, $output_file) = @ARGV;
 
 # Inicializa o parser de CSV
 my $csv_parser = Text::CSV->new( {	binary     => 1, 
-									sep_char   => ',', 
-									quote_char => '"' } );
+					sep_char   => ',', 
+					quote_char => '"' } );
 
 open( my $in  , '<:encoding(utf-8)' , $input_file );
 open( my $out , '>:encoding(utf-8)' , $output_file );
