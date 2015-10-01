@@ -19,7 +19,7 @@
 #
 # Syntax: "./dedupCsvValues.pl input_file output_file"
 # 
-# Author: Oberdan Luiz May
+# Author: @OberdanLuizMay
 #
 # Last update: 2015-09-10
 # 
