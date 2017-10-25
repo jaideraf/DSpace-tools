@@ -21,12 +21,20 @@
 # The PDF file names must be stored in a metadata field of the DSpace item 
 # ("dc.identifier.file" by default).
 #
-# Syntax: "./generateSafPackageFromPdf.sh pdfs out", where "pdfs" is the 
-# directory that contains the PDF files and "out" is the output directory.
-# Optionally, there is the third parameter to specify the metadata used to 
-# match the file name: "./generateSafPackageFromPdf.sh pdfs out metadata"
-# ("dc.identifier.file" is the default value).
-# 
+#/ Syntax: 
+#/ 
+#/ ./generateSafPackageFromPdf.sh pdfs out
+#/ 
+#/ Where "pdfs" is the directory that contains the PDF files and 
+#/ "out" is the output directory.
+#/ 
+#/ Optionally, there is the third parameter to specify the metadata  
+#/ used to match the file name: 
+#/ 
+#/ ./generateSafPackageFromPdf.sh pdfs out metadata
+#/
+#/ "dc.identifier.file" is the default value for this parameter.
+#/ 
 # Author: @vitorsilverio
 # Author: @jaideraf
 #
@@ -66,7 +74,7 @@ function makeContentsFile {
         local _file="$1"
         local _path="$2"
         
-        printf "%s\tbundle:ORIGINAL" "$_file" > "$_path"/contents
+        printf "%s\\tbundle:ORIGINAL" "$_file" > "$_path"/contents
 }
 
 function makeDCxmlFile {
@@ -77,7 +85,7 @@ function makeDCxmlFile {
         local _metadata="$3"
         
         checkMetadataToUse "$_metadata"
-        printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<dublin_core schema=\"$schema\">\n  <dcvalue element=\"$element\" qualifier=\"$qualifier\" language=\"\">%s</dcvalue>\n</dublin_core>" "$_file" > "$_path"/dublin_core.xml
+        printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\\n<dublin_core schema=\"$schema\">\\n  <dcvalue element=\"$element\" qualifier=\"$qualifier\" language=\"\">%s</dcvalue>\\n</dublin_core>" "$_file" > "$_path"/dublin_core.xml
 }
 
 function main {
@@ -100,6 +108,13 @@ function main {
                 count=$((count+1))
         done
 }
+
+# Generate --help option
+usage() {
+    grep '^#/' "$0" | cut -c4-
+    exit 0
+}
+expr "$*" : ".*--help" > /dev/null && usage
 
 # Params
 # 1 - pdfs path
